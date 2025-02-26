@@ -3,5 +3,6 @@ Name: us_visa
 Version: 0.0.0
 Author: ArpitKadam
 Author-email: arpitkadam922@gmail.com
+License-File: LICENSE
 Dynamic: author
 Dynamic: author-email
