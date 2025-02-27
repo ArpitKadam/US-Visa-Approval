@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+from datetime import date
 
 load_dotenv()
 
@@ -10,11 +11,19 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 PIPELINE_NAME: str = "us-visa-pipeline"
 ARTIFACT_DIR: str  = "Artifacts"
 MODEL_FILE_NAME: str = "model.pkl"
-SCALER_FILE_NAME: str = "scaler.pkl"
 
 FILE_NAME: str = "usvisa.csv"
 TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"
+
+TARGET_COLUMN: str = "case_status"
+CURRENT_YEAR = date.today().year
+PREPROCESSING_OBJECT_FILE_NAME: str = "preprocessing.pkl"
+SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
+
+"""
+DATA TRANSFORMATION CONSTANTS
+"""
 
 """
 DATA INGESTION CONSTANTS
@@ -27,5 +36,13 @@ DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
 
 """
+DATA VALIDATION CONSTANTS
 """
 
+DATA_VALIDATION_DIR_NAME: str = "data_validation"
+DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report"
+DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml"
+
+"""
+DATA TRANSFORMATION CONSTANTS
+"""

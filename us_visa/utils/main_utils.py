@@ -6,6 +6,7 @@ import numpy as np
 import dill
 import yaml
 import pandas as pd
+from pathlib import Path
 
 
 def read_yaml_file(file_path: str) -> dict:
@@ -22,15 +23,18 @@ def read_yaml_file(file_path: str) -> dict:
 
 def write_yaml_file(file_path: str, content: object, replace: bool = False) -> None:
     try:
-        logging.info(f"Writing yaml file to {file_path}")
-        if replace:
-            if os.path.exists(file_path):
-                os.remove(file_path)
-        with open(file_path, "w") as files:
-            yaml.dump(content, files)
-            logging.info(f"Yaml file written successfully to {file_path}")
+        logging.info(f"Writing YAML file to {file_path}")
+        directory = Path(file_path).parent
+        directory.mkdir(parents=True, exist_ok=True)
+        # Replace file if requested
+        if replace and os.path.exists(file_path):
+            os.remove(file_path)
+        # Write YAML file
+        with open(file_path, "w") as file:
+            yaml.dump(content, file)
+            logging.info(f"YAML file written successfully to {file_path}")
     except Exception as e:
-        logging.error(f"Error writing yaml file to {file_path}")
+        logging.error(f"Error writing YAML file to {file_path}")
         raise USVisaException(e, sys) from e
 
 
@@ -81,7 +85,7 @@ def save_object(file_path: str, obj: object) -> None:
         raise USVisaException(e, sys) from e
 
 
-def drop_columns(df: DataFrame, columns: list) -> DataFrame:
+def drop_columns(df: pd.DataFrame, columns: list) -> pd.DataFrame:
     try:
         logging.info(f"Dropping columns from DataFrame: {columns}")
         df = df.drop(columns=columns)
