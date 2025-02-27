@@ -5,7 +5,7 @@ import certifi
 from us_visa.logger import logging
 from us_visa.exception import USVisaException
 import sys
-import sys
+
 load_dotenv()
 
 ca = certifi.where()
@@ -15,18 +15,18 @@ MONGODB_URL_KEY = os.getenv("MONGO_DB_URI")
 
 class MongoDbClient:
     client = None
-    try:
-        def __init__(self, database_name=DATABASE_NAME) -> None:
+
+    def __init__(self, database_name = DATABASE_NAME) -> None:
+        try:
             if MongoDbClient.client is None:
                 mongo_db_url = MONGODB_URL_KEY
                 if mongo_db_url is None:
-                    raise USVisaException("Environment Key Error: MONGO_DB_URI is not set", sys)
-                
-                MongoDbClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=certifi.where())
-                self.client = MongoDbClient.client
-                self.database = self.client[database_name]
-                self.database_name = database_name
-                logging.info(f"Connected successfully to {self.database_name} database")
-                
-    except Exception as e:
-        raise USVisaException(e, sys)
+                    raise Exception(f"Environment key for mongodb url is not set")
+                MongoDbClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile = ca)
+            self.client = MongoDbClient.client
+            self.database = self.client[database_name]
+            self.database_name = database_name
+            logging.info("MongoDB connection established successfully")
+        except Exception as e:
+            logging.error(USVisaException(e, sys))
+            raise USVisaException(e, sys)
