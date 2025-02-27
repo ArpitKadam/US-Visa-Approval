@@ -10,7 +10,7 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 PIPELINE_NAME: str = "us-visa-pipeline"
 ARTIFACT_DIR: str  = "Artifacts"
-MODEL_FILE_NAME: str = "model.pkl"
+MODEL_FILE_NAME: str = "final_model.pkl"
 
 FILE_NAME: str = "usvisa.csv"
 TRAIN_FILE_NAME: str = "train.csv"
@@ -54,3 +54,12 @@ DATA_TRANSFORMATION_TRANSFORMED_TRAIN_DATA_FILE_NAME: str = "train.npy"
 DATA_TRANSFORMATION_TRANSFORMED_TEST_DATA_FILE_NAME: str = "test.npy"
 DATA_TRANSFORMATION_PREPROCESSING_OBJECT_FILE_NAME: str = "preprocessing.pkl"
 
+"""
+MODEL TRAINING CONSTANTS
+"""
+
+MODEL_TRAINER_DIR_NAME: str = "model_training"
+MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
+MODEL_TRAINER_TRAINED_MODEL_NAME: str = "final_model.pkl"
+MODEL_TRAINER_EXPECTED_SCORE: float = 0.7
+MODEL_TRAINER_CONFIG_FILE_PATH: str = os.path.join("config", "model.yaml")
