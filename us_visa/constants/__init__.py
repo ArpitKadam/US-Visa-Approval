@@ -7,6 +7,10 @@ load_dotenv()
 DATABASE_NAME   = os.getenv("MONGO_DB_NAME")
 MONGODB_URL_KEY = os.getenv("MONGO_DB_URI")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+BUCKET_NAME = os.getenv("MODEL_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY_ID = os.getenv("AWS_SECRET_ACCESS_KEY_ID")
+AWS_REGION = os.getenv("AWS_REGION")
 
 PIPELINE_NAME: str = "us-visa-pipeline"
 ARTIFACT_DIR: str  = "Artifacts"
@@ -63,3 +67,11 @@ MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME: str = "final_model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float = 0.7
 MODEL_TRAINER_CONFIG_FILE_PATH: str = os.path.join("config", "model.yaml")
+
+"""
+MODEL EVALUATION CONSTANTS
+"""
+
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+MODEL_BUCKET_NAME: str = os.getenv("MODEL_BUCKET_NAME")
+MODEL_PUSH_S3_KEY: str = os.getenv("MODEL_PUSHER_S3_KEY")
